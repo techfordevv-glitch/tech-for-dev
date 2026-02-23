@@ -82,11 +82,38 @@ export default async function NewsPage({ searchParams }) {
               </div>
             ))
           ) : (
-            <div className="col-12 text-center text-muted py-5">
-              <FaNewspaper size={50} className="mb-3 opacity-25" />
-              <h5>No news available</h5>
-              <p>Add your GNews API key in .env.local to see live tech news.</p>
-              <code className="d-block mt-2">GNEWS_API_KEY=your_api_key_here</code>
+            <div className="col-12">
+              <div className="text-center py-5" style={{
+                background: "var(--bg-card)",
+                borderRadius: 16,
+                border: "1px solid var(--border-color)",
+                padding: "3rem 2rem"
+              }}>
+                <div style={{ fontSize: 56, marginBottom: 16 }}>📰</div>
+                <h4 className="fw-bold mb-2" style={{ color: "var(--text-primary)" }}>
+                  {query ? `No results for "${query}"` : "News Temporarily Unavailable"}
+                </h4>
+                <p className="text-muted mb-4" style={{ maxWidth: 420, margin: "0 auto 1.5rem" }}>
+                  {query
+                    ? "Try a different keyword — e.g. AI, JavaScript, or Cybersecurity."
+                    : "Our news feed is taking a short break. We automatically refresh every 30 minutes. Please check back soon!"
+                  }
+                </p>
+                {!query && (
+                  <div className="d-flex flex-wrap justify-content-center gap-2">
+                    {["AI", "JavaScript", "Python", "Cybersecurity", "Open Source"].map((topic) => (
+                      <a
+                        key={topic}
+                        href={`/news?q=${topic}`}
+                        className="badge rounded-pill px-3 py-2 text-decoration-none"
+                        style={{ background: "var(--accent-blue)", color: "#fff", fontSize: 13 }}
+                      >
+                        🔍 {topic}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>

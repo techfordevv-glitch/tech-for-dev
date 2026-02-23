@@ -74,8 +74,17 @@ export default async function RedditPage() {
                   </div>
                 ))
               ) : (
-                <div className="col-12 text-center text-muted py-4">
-                  <p>Unable to load posts. Reddit API may be rate-limited.</p>
+                <div className="col-12">
+                  <div className="d-flex align-items-center gap-3 py-4 px-4 rounded-3" style={{
+                    background: "var(--bg-card)",
+                    border: "1px dashed var(--border-color)"
+                  }}>
+                    <span style={{ fontSize: 32 }}>🕐</span>
+                    <div>
+                      <div className="fw-semibold" style={{ color: "var(--text-primary)" }}>Posts temporarily unavailable</div>
+                      <div className="text-muted small mt-1">Reddit limits API requests periodically. Content will reload automatically — or <a href="/reddit" className="text-warning text-decoration-none fw-semibold">refresh the page</a>.</div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
