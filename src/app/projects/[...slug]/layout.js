@@ -1,5 +1,4 @@
-export const dynamicParams = false;
-export const generateStaticParams = async () => [];
+export const dynamicParams = true;
 
 export default function Layout({ children }) {
   return children;
