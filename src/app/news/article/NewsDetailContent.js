@@ -71,13 +71,13 @@ export default function NewsDetailContent() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiExpanded, setAiExpanded] = useState(false);
 
+  const title      = searchParams.get("title")   || "";
+  const description= searchParams.get("desc")    || "";
+
   // Award dev points on article read
   useEffect(() => {
     if (title) awardPoints("article_read", 5);
   }, [title]);
-
-  const title      = searchParams.get("title")   || "";
-  const description= searchParams.get("desc")    || "";
   const content    = searchParams.get("content") || "";
   const url        = searchParams.get("url")     || "";
   const image      = searchParams.get("image")   || "";
