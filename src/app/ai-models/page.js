@@ -41,8 +41,9 @@ function formatNum(n) {
 }
 
 function ModelCard({ model, pipelineColor }) {
-  const modelSlug = encodeURIComponent(model.modelId || model.id || "");
-  const displayId = (model.modelId || model.id || "").split("/").pop();
+  const rawId = model.modelId || model.id || "";
+  const modelSlug = rawId.replace(/\//g, "--");
+  const displayId = rawId.split("/").pop();
 
   return (
     <div

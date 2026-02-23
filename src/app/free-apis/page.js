@@ -23,7 +23,7 @@ export const metadata = {
 };
 
 function slugify(name) {
-  return encodeURIComponent(name.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, ""));
+  return name.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 }
 
 function AuthBadge({ auth }) {

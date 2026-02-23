@@ -62,7 +62,7 @@ function InfoRow({ label, value }) {
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
-  const modelId = decodeURIComponent(id);
+  const modelId = id.replace(/--/g, "/");
   const shortName = modelId.split("/").pop();
   const author = modelId.split("/")[0] || "Hugging Face";
   const desc = `Explore the ${shortName} AI model by ${author} on Hugging Face. View model details, pipeline type, downloads, and try it on TechForDev.`;
@@ -84,7 +84,7 @@ export async function generateMetadata({ params }) {
 
 export default async function AIModelDetailPage({ params }) {
   const { id } = await params;
-  const modelId = decodeURIComponent(id);
+  const modelId = id.replace(/--/g, "/");
   const [model, related] = await Promise.all([
     fetchModelDetail(modelId),
     fetchRelatedModels("", modelId), // will be replaced after we know pipeline

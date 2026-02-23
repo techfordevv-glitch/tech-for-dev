@@ -5,9 +5,7 @@ import { fetchPublicAPIs } from "@/lib/newApis";
 export const revalidate = 86400;
 
 function slugify(name) {
-  return encodeURIComponent(
-    name.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "")
-  );
+  return name.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "");
 }
 
 export async function generateMetadata({ params }) {
