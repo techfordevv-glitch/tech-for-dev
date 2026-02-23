@@ -48,7 +48,22 @@ export default function Navbar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const [othersOpen, setOthersOpen] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
   const { theme, toggleTheme, cycleTheme } = useTheme();
+
+  useEffect(() => {
+    const seen = localStorage.getItem("nav_tooltip_seen");
+    if (!seen) {
+      const t = setTimeout(() => {
+        setShowTooltip(true);
+        setTimeout(() => {
+          setShowTooltip(false);
+          localStorage.setItem("nav_tooltip_seen", "1");
+        }, 4500);
+      }, 1200);
+      return () => clearTimeout(t);
+    }
+  }, []);
 
   const themeIcon = theme === "dark" ? <FaMoon /> : theme === "light" ? <FaSun /> : theme === "sepia" ? <FaLeaf /> : <FaCircle />;
   const themeLabel = theme === "dark" ? "Dark" : theme === "light" ? "Light" : theme === "sepia" ? "Sepia" : "OLED";
@@ -128,10 +143,15 @@ export default function Navbar() {
             </button>
             <button
               className="sidebar-hamburger"
-              onClick={() => setSidebarOpen(true)}
+              onClick={() => { setSidebarOpen(true); setShowTooltip(false); localStorage.setItem("nav_tooltip_seen", "1"); }}
               aria-label="Open menu"
             >
               <FaBars size={18} />
+              {showTooltip && (
+                <span className="hamburger-tooltip">
+                  <span className="tooltip-text">✨ Explore all features here →</span>
+                </span>
+              )}
             </button>
           </div>
 

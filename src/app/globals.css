@@ -1376,9 +1376,9 @@ footer .badge.text-dark * {
 
 /* ===== MOBILE SIDEBAR ===== */
 .sidebar-hamburger {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: rgba(128, 128, 128, 0.12);
+  border: 1px solid rgba(128, 128, 128, 0.2);
+  color: var(--text-primary);
   border-radius: 8px;
   padding: 6px 10px;
   cursor: pointer;
@@ -1386,9 +1386,58 @@ footer .badge.text-dark * {
   align-items: center;
   justify-content: center;
   transition: background 0.2s ease;
+  position: relative;
 }
 .sidebar-hamburger:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(128, 128, 128, 0.22);
+}
+
+/* ===== HAMBURGER TOOLTIP BUBBLE ===== */
+.hamburger-tooltip {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: var(--accent-blue);
+  color: #fff;
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(59,130,246,0.4);
+  pointer-events: none;
+  animation: tooltipFadeIn 0.3s ease forwards;
+}
+.hamburger-tooltip::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 14px;
+  border-width: 0 6px 6px 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--accent-blue) transparent;
+}
+.hamburger-tooltip .tooltip-text {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  animation: tooltipTyping 1.4s steps(28, end) 0.3s both;
+  border-right: 2px solid rgba(255,255,255,0.7);
+  animation: tooltipTyping 1.4s steps(28, end) 0.3s forwards, tooltipCaret 0.6s step-end 0.3s infinite;
+  width: 0;
+}
+@keyframes tooltipTyping {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+@keyframes tooltipCaret {
+  0%, 100% { border-color: rgba(255,255,255,0.7); }
+  50%       { border-color: transparent; }
+}
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Overlay */
